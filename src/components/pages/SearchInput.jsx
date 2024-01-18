@@ -13,8 +13,9 @@ const SearchInput = () => {
     e.preventDefault();
     // setLoading(true);
     try {
-      const { data } = await axios.get(`https://restapinodejs.onrender.com/api/search/${values.keyword}`);
+      const  {data}  = await axios.get(`https://restapinodejs.onrender.com/api/search/${values.keyword}`);
       setValues({ ...values, results: data });
+      console.log(data);
       navigate("/search");
     } catch (error) {
       console.log(error);
@@ -29,7 +30,7 @@ const SearchInput = () => {
     <form onSubmit={searchSubmit}>
 
     <TextField
-            sx={{ marginBottom: "10px", marginLeft: "35px" }}
+            // sx={{ marginBottom: "10px", marginLeft: "35px" }}
             label="Search"
             variant="outlined"
             placeholder="search"
@@ -41,6 +42,34 @@ const SearchInput = () => {
                 <SearchIcon sx={{ cursor: "pointer" }} />
               </InputAdornment>
             ),
+          }}
+          sx={{
+            marginLeft: "35px",
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+               
+                borderColor: "#bdbdbd",
+                borderRadius: "20px",
+                paddingTop: "4px",
+                paddingBottom: "4px",
+              },
+              "&:hover fieldset": {
+                borderColor: "white",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black",
+              },
+            },
+            "& .MuiInputLabel-outlined": {
+              color: "#7f8182",
+            },
+            "& .MuiInputBase-input": {
+              color: "#7f8182",
+            },
+            height: "20px",
+            marginTop: "5px",
+            
+            borderRadius: "15px",
           }}
           />
     </form>

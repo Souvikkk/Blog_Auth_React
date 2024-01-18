@@ -14,7 +14,7 @@ const Footer = () => {
           height: "auto",
           backgroundColor: "#1f292e",
           color: "white",
-          marginTop: "50px",
+          marginTop: "40px",
           padding: "0px 20px 10px 20px",
           maxWidth: "100%",
           mx:'auto',

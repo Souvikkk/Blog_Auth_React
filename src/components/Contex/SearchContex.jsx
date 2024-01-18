@@ -4,13 +4,13 @@ import { createContext, useContext, useState } from "react";
 const SearchContext = createContext();
 
  const SearchProvider = ({ children }) => {
-  const [auth, setAuth] = useState({
+  const [value, setValue] = useState({
     keyword :"",
     results :[]
   });
 
   return (
-    <SearchContext.Provider value={ [auth, setAuth] }>
+    <SearchContext.Provider value={ [value, setValue] }>
       {children}
     </SearchContext.Provider>
   );

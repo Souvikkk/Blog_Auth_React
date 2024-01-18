@@ -65,7 +65,7 @@ const BlogDetails = () => {
     try {
       if (!islikeClicked) {
         const response = await PostLike(id);
-        setLike(response?.data.likes);
+        setLike(response?.data?.likes);
         Getblog();
         setIsLikeClicked(true);
         localStorage.setItem(`liked_${id}`, "true");
@@ -437,6 +437,7 @@ const BlogDetails = () => {
                             fontSize: "15px",
                             padding: "0px",
                             variant: "outlined",
+                            color: islikeClicked ? "red" : "grey",
                           }}
                           disabled={islikeClicked}
                         >
@@ -453,6 +454,7 @@ const BlogDetails = () => {
                             fontSize: "15px",
                             padding: "0px",
                             variant: "outlined",
+                            color: isDisLikeClicked ? "primary" : "grey",
                           }}
                           disabled={isDisLikeClicked}
                         >
@@ -526,7 +528,7 @@ const BlogDetails = () => {
                       onClick={handleMoreComment}
                       sx={{
                         fontSize: "10px",
-                        marginLeft: "35px",
+                        marginLeft: "25px",
                         marginTop: "5px",
                       }}
                     >

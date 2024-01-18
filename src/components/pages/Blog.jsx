@@ -49,15 +49,13 @@ const Blog = () => {
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPosts = allBlog.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = allBlog?.slice(indexOfFirstPost, indexOfLastPost);
 
   // console.log("Search Query (Blog):", searchQuery);
   // console.log("Filtered Blog:", filteredBlog);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  console.log("currentPage:", currentPage);
-  console.log("indexOfLastPost:", indexOfLastPost);
-  console.log("indexOfFirstPost:", indexOfFirstPost);
+
 
 
   function handleClick(event) {

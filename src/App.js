@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import Profile from "./components/pages/Profile";
 import SearchPage from "./components/pages/SearchPage";
+import { useAuth } from "./components/Contex/AuthContext";
 
 
 
@@ -62,7 +63,7 @@ const ProtectedRoute = ({children})=>{
 
 
 function App() {
-
+const [auth] = useAuth()
  
   const PublicRoute =[
     {
@@ -71,11 +72,11 @@ function App() {
     },
     {
       path :'/login',
-      component:<Login/>
+      component: !auth?.user? <Login/> : <Profile/>
     },
     {
       path :'/register',
-      component:<Register/>
+      component:!auth?.user? <Register/> : <Profile/>
     },
     {
       path :'/about',

@@ -18,30 +18,40 @@ import "react-toastify/dist/ReactToastify.css";
 import Layout from "../Layouts/Layout";
 import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
-  console.log("hello", process.env.REACT_APP_API);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [mobile, setMobile] = useState("");
+  // console.log("hello", process.env.REACT_APP_API);
+ const initialData ={
+  name:"",
+  email:"",
+  password:"",
+  mobile:"",
+  photo:""
+ }
+  const [users, setUsers] = useState(initialData);
+  const [img, setImg] = useState();
   // const [photo, setPhoto] = useState("");
   const [loading,setLoading] = useState(false)
-  const [img, setImg] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleChange =(e)=>{
+    const {name,value} = e.target;
+    setUsers({...users,[name]:value})
+  }
+  const handleSubmit = async (data) => {
     setLoading(true)
     try {
-      e.preventDefault();
+      data.preventDefault();
+      
+      let formData = new FormData()
+      formData.append("name",users.name)
+      formData.append("email",users.email)
+      formData.append("password",users.password)
+      formData.append("mobile",users.mobile)
+      formData.append("photo",img)
+
       const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/register`,
-        {
-          name,
-          email,
-          password,
-          mobile,
-          img
-        }
+        `${process.env.REACT_APP_API}/api/register`,formData
       );
+console.log('res',res);
       setLoading(false)
       if (res && res.data) {
         toast.success(res.data.message);
@@ -97,9 +107,9 @@ const Register = () => {
                       style={{ border: "2px solid black",borderRadius:'10px' }}
                       placeholder="Enter Name"
                       label="Name"
-                      value={name}
+                      value={users.name}
                       name="name"
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={handleChange}
                       required
                       autoFocus
                       fullWidth
@@ -119,9 +129,9 @@ const Register = () => {
                       placeholder="Enter Email"
                       label="Email"
                       type="email"
-                      value={email}
+                      value={users.email}
                       name="email"
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={handleChange}
                       required
                       fullWidth
                       inputProps={{
@@ -140,9 +150,9 @@ const Register = () => {
                       placeholder="Enter Password"
                       label="Password"
                       type="password"
-                      value={password}
+                      value={users.password}
                       name="password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={handleChange}
                       required
                       fullWidth
                       inputProps={{
@@ -160,9 +170,9 @@ const Register = () => {
                      style={{ border: "2px solid black",borderRadius:'10px' }}
                       placeholder="Enter Mobile"
                       label="Mobile No."
-                      value={mobile}
+                      value={users.mobile}
                       name="mobile"
-                      onChange={(e) => setMobile(e.target.value)}
+                      onChange={handleChange}
                       required
                       fullWidth
                       inputProps={{
@@ -175,7 +185,7 @@ const Register = () => {
                       }}
                     />
                   </Grid>
-                  <InputLabel htmlFor="upload-photo" sx={{color:'blue'}}>Upload Photo</InputLabel>
+                  <InputLabel htmlFor="upload-photo" sx={{color:'blue'}}>Upload Your Profile Pic</InputLabel>
               <Input
                 id="upload-photo"
                type="file"

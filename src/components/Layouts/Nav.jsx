@@ -15,7 +15,7 @@ import { useAuth } from "../Contex/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const publicPages = ["Home", "About", "Course", "Blog", "Login", "register"];
+const publicPages = ["Home", "About", "Blog", "Course", "Login", "register"];
 const privatePages = ["Home", "About", "Blog", "Course", "Contact"];
 const settings = ["Profile", "Logout"];
 
@@ -103,6 +103,7 @@ function ResponsiveAppBar() {
       handleLogout();
     }
   };
+  console.log('auth',auth?.user);
   return (
     <AppBar position="static" sx={{ backgroundColor: "#1f292e" }}>
       <Container maxWidth="xl">
@@ -330,9 +331,10 @@ function ResponsiveAppBar() {
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
-                  // alt={auth.user?.name?.charAt(0).toUpperCase()}
-                  alt={auth.user?.img}
-                  src="/static/images/avatar/2.jpg"
+                 
+                 src={`https://restapinodejs.onrender.com/${auth?.user?.photo}`}
+                  alt={auth.user?.name}
+                
                   sx={{ marginRight: "10px", bgcolor: "#f059f0" }}
                 />
               </IconButton>
